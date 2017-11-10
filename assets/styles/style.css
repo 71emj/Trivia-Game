@@ -1,0 +1,231 @@
+/* @font-face kit by Fonts2u (http://www.fonts2u.com) */
+
+@font-face {
+	font-family: "STARWARS";
+	src: url("STARWARS.eot?") format("eot"), url("STARWARS.woff") format("woff"), url("STARWARS.ttf") format("truetype"), url("STARWARS.svg#STARWARS") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+
+html {
+	height: 100%;
+	overflow: hidden;
+}
+
+body {
+	min-height: 100%;
+	background: url(../images/star_wars.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+main {
+	position: relative;
+	top: 0;
+	min-height: 100%;
+	padding: 15vh 0;
+}
+
+.viewport-grow {
+	padding: 7.5vh 0 !important;
+}
+
+header button {
+	position: relative;
+	top: 9px;
+}
+
+p {
+	text-align: center;
+	font-family: "Cutive Mono", monospace;
+	letter-spacing: 1px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+	cursor: default;
+}
+
+em {
+	color: #fb6b6b;
+}
+
+h2.text-left {
+	color: #7a7a7a;
+	padding-bottom: 0.5rem;
+	font-size: 2.25rem;
+}
+
+.jumbotron {
+	position: relative;
+	display: flex;
+	flex-flow: column;
+	min-height: 70vh;
+	background: rgba(255, 255, 255, 0.6);
+	box-shadow: 0px 0px 50px rgb(255, 255, 255);
+	border-radius: 3px !important;
+}
+
+.jumbotron p:nth-of-type(1) {
+	width: 75%;
+	margin: 0 auto 4.5rem;
+	padding-top: .5rem;
+}
+
+.jumbotron>h1 {
+	padding-bottom: 3rem;
+	margin-top: 0;
+	font-size: 5rem;
+	line-height: 1.5;
+}
+
+#intro {
+	display: none;
+}/* @font-face kit by Fonts2u (http://www.fonts2u.com) */
+
+@font-face {
+	font-family: "STARWARS";
+	src: url("STARWARS.eot?") format("eot"), url("STARWARS.woff") format("woff"), url("STARWARS.ttf") format("truetype"), url("STARWARS.svg#STARWARS") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+
+html {
+	height: 100%;
+	overflow: hidden;
+}
+
+body {
+	min-height: 100%;
+	background: url(../images/star_wars.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+main {
+	position: relative;
+	top: 0;
+	min-height: 100%;
+	padding: 15vh 0;
+}
+
+.viewport-grow {
+	padding: 7.5vh 0 !important;
+}
+
+header button {
+	position: relative;
+	top: 9px;
+}
+
+p {
+	text-align: center;
+	font-family: "Cutive Mono", monospace;
+	letter-spacing: 1px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+	cursor: default;
+}
+
+em {
+	color: #fb6b6b;
+}
+
+h2.text-left {
+	color: #7a7a7a;
+	padding-bottom: 0.5rem;
+	font-size: 2.25rem;
+}
+
+.jumbotron {
+	position: relative;
+	display: flex;
+	flex-flow: column;
+	min-height: 70vh;
+	background: rgba(255, 255, 255, 0.6);
+	box-shadow: 0px 0px 50px rgb(255, 255, 255);
+	border-radius: 3px !important;
+}
+
+.jumbotron p:nth-of-type(1) {
+	width: 75%;
+	margin: 0 auto 4.5rem;
+	padding-top: .5rem;
+}
+
+.jumbotron>h1 {
+	padding-bottom: 3rem;
+	margin-top: 0;
+	font-size: 5rem;
+	line-height: 1.5;
+}
+
+#intro {
+	display: none;
+}
+
+#game {
+	display: table;	
+	width: 100%;
+	min-height: 400px;
+}
+
+.question p {
+	float: left;
+	margin-bottom: 3.5rem !important;
+	padding: 1rem 0 !important;
+	width: 100% !important;
+	text-align: left;
+}
+
+.text-center {
+	text-align: center !important;
+}
+
+.clear {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.timer {
+	display: table-row;
+	height: 5rem;
+	margin-right: 3px;
+	margin-bottom: 1rem;
+	font-size: 2.5rem;
+	font-weight: 600;
+}
+
+.list-group {
+	display: table-row-group;
+}
+
+.list-group-item {
+	display: table-row;
+	height: 6rem;
+}
+
+#question-phase {
+	display: block;
+}
+
+#answer-phase {
+	display: none;
+}
+
+#answer-phase img {
+	display: table-cell;
+	width: 300px;
+	height: auto;
+	margin: 0 auto;
+}
+
+#answer-phase p {
+	text-align: center !important;
+	margin-bottom: 3rem;
+}
