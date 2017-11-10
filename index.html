@@ -25,42 +25,72 @@
 				<h1 class="text-center" id="title">
 					Trivia Master
 				</h1>
-				<div id="intro">
-					<p>
-						Welcome to a round of <em><b>Trivia Master</b></em>, the theme for today will be <span><b><em>STAR WARS</em></b></span>. Test your knowledge on our favorite theme against your peer, and prove yourself to be the true master in a duel of intellect.
-					</p>
-					<p>
-						<button class="btn btn-danger btn-lg">Start Game</button>
-					</p>
-				</div>
 				<div id="game">
-					<div class="question">
+					<div id="intro" class="text-center">
 						<p>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe doloremque aliquid accusantium minima ipsum sint inventore, itaque possimus eos dolor perspiciatis obcaecati, perferendis esse enim nobis sunt dolore in explicabo.
+							Welcome to a round of <em><b>Trivia Master</b></em>, the theme for today will be <span class="theme"><b><em>STAR WARS</em></b></span>. Test your knowledge on our favorite theme against your peer, and prove yourself to be the true master in a duel of intellect.
 						</p>
+						<button class="btn btn-danger btn-lg" id="game-start">Start Game</button>
 					</div>
-					<div class="clear"></div>
-					<div class="timer pull-right">
-						30
+					<div id="question-phase">
+						<div class="question">
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe doloremque aliquid accusantium minima ipsum sint inventore, itaque possimus eos dolor perspiciatis obcaecati, perferendis esse enim nobis sunt dolore in explicabo.
+							</p>
+						</div>
+						<div class="clear"></div>
+						<div class="timer pull-right">
+							30
+						</div>
+						<div class="clear"></div>
+						<div class="list-group">
+							<!-- $('list-group').children().eq(0) -->
+							<button type="button" class="list-group-item" data-ref="1">Cras justo odio</button>
+							<!-- $('list-group').children().eq(1) -->
+							<button type="button" class="list-group-item" data-ref="2">Dapibus ac facilisis in</button>
+							<!-- $('list-group').children().eq(2) -->
+							<button type="button" class="list-group-item" data-ref="3">Morbi leo risus</button>
+							<!-- $('list-group').children().eq(3) -->
+							<button type="button" class="list-group-item" data-ref="4">Porta ac consectetur ac</button>
+						</div>
 					</div>
-					<div class="clear"></div>
 					<div id="answer-phase">
+						<div class="congrats">
+							<p class="text-center">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis at dolores sint pariatur et est voluptate nemo, autem nostrum debitis sunt enim, dolore, magni tenetur facilis neque eum quae sequi.
+							</p>
+						</div>
 						<p>The correct answer was: something</p>
 						<img src="assets/images/placeholder.jpg" alt="answer" />
 					</div>
-					<div class="list-group" id="question-phase">
-						<!-- $('list-group').children().eq(0) -->
-						<button type="button" class="list-group-item" data-ref="1">Cras justo odio</button>
-						<!-- $('list-group').children().eq(1) -->
-						<button type="button" class="list-group-item" data-ref="2">Dapibus ac facilisis in</button>
-						<!-- $('list-group').children().eq(2) -->
-						<button type="button" class="list-group-item" data-ref="3">Morbi leo risus</button>
-						<!-- $('list-group').children().eq(3) -->
-						<button type="button" class="list-group-item" data-ref="4">Porta ac consectetur ac</button>
+					<div id="end-game" class="text-center">
+						<div class="title">
+							<p>
+								All done, here's your score:
+							</p>
+						</div>
+						<ul>
+							<li>
+								<p>
+									Correct Answers: <span>1</span>
+								</p>
+							</li>
+							<li>
+								<p>
+									Incorrect Answers: <span>2</span>
+								</p>
+							</li>
+							<li>
+								<p>
+									Unanswers: <span>3</span>
+								</p>
+							</li>
+						</ul>
+						<button type="button" class="btn btn-primary">
+							Start Over?
+						</button>
 					</div>
-
 				</div>
-				
 			</div>
 		</div>
 	</main>

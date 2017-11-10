@@ -18,7 +18,7 @@
 
 		// setup( seconds, display = DOM || $(DOM) )
 		setTimer: function(duration, display) {
-			this.displayTimer = display;
+			this.displayTimer = display.empty();
 			this.displayTimer.text(this.setTime) ||
 				(this.displayTimer.textContent = this.setTime);
 			this.setTime = duration;
@@ -27,16 +27,19 @@
 		},
 
 		startTimer: function() {
-			this.intervalId = setInterval(this.timerCounting.bind(this), 1000);
+			setTimeout(function() {
+				this.intervalId = setInterval(this.timerCounting.bind(this), 1000);
+			}.bind(this), 1000);
 			return;
 		},
 
 		stop: function() {
 			clearInterval(this.intervalId);
-			this.timerReset();
+			setTimeout(this.timerReset, 800); // global	
 			return;
 		},
 
+		// deprecated
 		hideShow: function() {
 			this.displayTimer.fadeToggle(300);
 			this.stop();
@@ -55,8 +58,6 @@
 			this.curTime = this.setTime;
 			this.displayTimer.text(this.setTime) ||
 				(this.displayTimer.textContent = this.setTime);
-
-			this.startTimer(); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! for testing purpose only	
 			return;
 		}
 	}
@@ -68,15 +69,15 @@
 		library: {},
 
 		// show library contents, DOM || $(DOM)
-		displayTheme: undefined,
+		triviaTheme: undefined,
 
-		displayQuestion: undefined,
+		gameStageQuestion: undefined,
 
-		displayAnswers: undefined,
+		gameStageAnswers: undefined,
 
-		stageQuestions: undefined,
+		gamePhaseQuestion: undefined,
 
-		stageAnswers: undefined,
+		gamePhaseAnswer: undefined,
 
 		// quiz theme, answers
 		theme: undefined,
@@ -89,11 +90,11 @@
 		triviaSetup: function(library, showTheme, showQuestion, showAnswers, stageQ, stageA) {
 			this.library = library;
 			this.theme = this.library[0]['theme'];
-			this.displayTheme = showTheme;
-			this.displayQuestion = showQuestion;
-			this.displayAnswers = showAnswers;
-			this.stageQuestions = stageQ;
-			this.stageAnswers = stageA;
+			this.triviaTheme = showTheme;
+			this.gameStageQuestion = showQuestion;
+			this.gameStageAnswers = showAnswers;
+			this.gamePhaseQuestion = stageQ;
+			this.gamePhaseAnswer = stageA;
 			return;
 		},
 
@@ -105,16 +106,16 @@
 
 
 			// populate game question phase
-			this.displayTheme.text(this.theme) ||
+			this.triviaTheme.text(this.theme) ||
 				(this.diplayTheme.textContent = this.theme);
 
-			this.displayQuestion.text(question) ||
-				(this.displayQuestion.textContent = question);
+			this.gameStageQuestion.text(question) ||
+				(this.gameStageQuestion.textContent = question);
 
 			// this.answers = [ {Q1}, {Q2}, {Q3}, {Q4} ]
-			for (let i = 0, l = this.displayAnswers.length; i < l; i++) {
-				this.displayAnswers.eq(i).text(answers[i]['ask']) ||
-					(this.displayAnswers[i].textContent = answers[i]['ask']);
+			for (let i = 0, l = this.gameStageAnswers.length; i < l; i++) {
+				this.gameStageAnswers.eq(i).text(answers[i]['ask']) ||
+					(this.gameStageAnswers[i].textContent = answers[i]['ask']);
 				if (answers[i]['isCorrect']) {
 					this.answerIndex = i;
 				}
@@ -129,12 +130,13 @@
 				images = defaultPath['image'];
 
 			// populate games answer phase
-			const $textArea = this.stageAnswers.children().eq(0),
-				$image = this.stageAnswers.children().eq(1);
+			const $msgArea = this.gamePhaseAnswer.children().eq(0);
+			$textArea = this.gamePhaseAnswer.children().eq(1),
+				$image = this.gamePhaseAnswer.children().eq(2);
 
 			const winLose = correct ? 'Correct!!' : "Wrong!!",
 				stringWinLose = `<i><b>${winLose}</b></i> The answer was: <em>${answers[this.answerIndex]['ask']}.</em>`;
-			
+
 			console.log($textArea);
 			console.log($image);
 
@@ -157,7 +159,7 @@
 		// this method only works in jQuery, will need to revisit it later
 		showAnswer: function($domObj1, $domObj2, stageIndex, correct = false) {
 			this.populateAnswer(stageIndex, correct);
-			
+
 			$domObj1.animate({
 				opacity: "toggle",
 			}, 800, function() {
@@ -168,40 +170,212 @@
 		}
 	}
 
+	// trivia game handler
+	// const triviaGameHandler = {
+
+	// 	// game state flags
+	// 	gameStageIndex: 0,
+
+	// 	timeOutId: null,
+
+	// 	// DOM object reference
+	// 	$objDomDefault: $('#game').children().eq(0),
+
+	// 	$objDomTriviaTheme: $('.jumbotron').children().eq(0),
+
+	// 	$objDomTimer: $('#game').children().eq(0).children('.timer').eq(0),
+
+	// 	$objDomQuestion: $('#game').children().eq(0).children().eq(0).children('p'),
+
+	// 	$objDomAnsweringBtns: $('#game').children().eq(0).children('.list-group').children(),
+
+	// 	$objDomGameInit: $('#intro'),
+
+	// 	$objDomGameQuestion: $('#question-phase'),
+
+	// 	$objDomGameAnswer: $('#answer-phase'),
+
+	// 	$objDomGameOver: $('#end-game'),
+
+	// 	// obj & library reference
+	// 	library: triviaLibrary,
+
+	// 	timer: countDownTimer,
+
+	// 	trivia: triviaText,
+
+
+	// 	// methods
+	// 	gameInit: function(triviaText) {
+	// 		triviaText.triviaSetup(
+	// 			this.library,
+	// 			this.$objDomTriviaTheme,
+	// 			this.$objDomQuestion,
+	// 			this.$objDomAnsweringBtns,
+	// 			this.$objDomGameQuestion,
+	// 			this.$objDomGameAnswer
+	// 		);
+	// 		return;
+	// 	},
+
+	// 	stageChangeHandler: function (countDownTimer, triviaText, myAnswer = false) {
+	// 		triviaText.showAnswer(
+	// 			this.$objDomGameQuestion,
+	// 			this.$objDomGameAnswer,
+	// 			this.gameStageIndex,
+	// 			myAnswer
+	// 		);
+	// 		this.gameStageIndex += 1;
+	// 		countDownTimer.stop().bind(countDownTimer);
+	// 		setTimeout(function() {
+	// 			triviaText.showAnswer(
+	// 				this.$objDomGameAnswer,
+	// 				this.$objDomGameQuestion,
+	// 				this.gameStageIndex,
+	// 				myAnswer
+	// 			);
+	// 		}, 5000);
+	// 	},
+
+	// 	triviaGameStage: function(countDownTimer, triviaText) {
+	// 		countDownTimer.setTimer(25, this.$objDomTimer);
+	// 		countDownTimer.startTimer();
+	// 		triviaText.populateQuestion(this.gameStageIndex);
+
+	// 		this.timeOutId = setTimeout(function() {
+	// 			this.stageChangeHandler(false);
+
+	// 			if (this.gameStageIndex < 4) {
+	// 				setTimeout(triviaGameStage.call(this), 5000);
+	// 			}
+	// 			clearTimeout(this.timeOutId);
+	// 			return;
+	// 		}, 25000);
+	// 	}
+
+	// }
+
+
+
+	// triviaGameHandler.gameInit(triviaText);
+	// triviaGameHandler.triviaGameStage(countDownTimer, triviaText);
+
+	// triviaGameHandler.$objDomDefault
+	// 	.children('.list-group')
+	// 	.children('button')
+	// 	.click(function(event) {
+	// 		triviaText.isCorrectAnswer($(this).data('ref'));
+	// 		triviaGameHandler.stageChangeHandler(countDownTimer, triviaText, true);
+	// 		console.log(triviaGameHandler.gameStageIndex);
+
+	// 		if (triviaGameHandler.gameStageIndex < 4) {
+	// 			setTimeout(triviaGameHandler.triviaGameStage.call(triviaGameHandler), 5000);
+	// 		}
+	// 		clearTimeout(triviaGameHandler.timeOutId);
+	// 	});
+
+
+
 
 	let gameStageIndex = 0;
-	const $objDomTimer = $('#game').children('.timer').eq(0);
+	let timeOutId;
+	const $objDomTimer = $('#game').children().eq(1).children('.timer').eq(0);
 
-	countDownTimer.setTimer(25, $objDomTimer);
-	countDownTimer.startTimer();
 
-	triviaText.triviaSetup(
-		triviaLibrary,
-		$('.jumbotron').children().eq(0),
-		$('#game').children().eq(0).children('p'),
-		$('#game').children('.list-group').children(),
-		$('#question-phase'),
-		$('#answer-phase')
-	);
 
-	triviaText.populateQuestion(gameStageIndex);
+	function gameInit() {
+		triviaText.triviaSetup(
+			triviaLibrary,
+			$('.jumbotron').children().eq(0),
+			$('#game').children().eq(1).children().eq(0).children('p'),
+			$('#game').children().eq(1).children('.list-group').children(),
+			$('#question-phase'),
+			$('#answer-phase')
+		);
 
-	$('#game').children('.list-group').children('button').click(function(event) {
-		const myAnswer = triviaText.isCorrectAnswer($(this).data('ref'));
-		console.log(myAnswer);
+		$('.theme').text(triviaText.triviaTheme);
+		return;
+	};
 
+	$('#game-start').click(function() {
+		$('#intro').fadeOut(800, function() {
+			$('#question-phase').fadeIn(800);
+		});
+
+		questions();
+		return;
+	})
+
+
+
+
+	gameInit();
+
+
+
+
+
+	// triviaText.populateQuestion(gameStageIndex);
+
+	function stageChangeHandler(myAnswer = false) {
 		setTimeout(function() {
-			triviaText.showAnswer(triviaText.stageQuestions, triviaText.stageAnswers, gameStageIndex, myAnswer);
-			countDownTimer.hideShow();
+			triviaText.showAnswer(triviaText.gamePhaseQuestion, triviaText.gamePhaseAnswer, gameStageIndex, myAnswer);
+			gameStageIndex += 1;
+			countDownTimer.stop();
 			setTimeout(function() {
-				triviaText.showAnswer(triviaText.stageAnswers, triviaText.stageQuestions, gameStageIndex, myAnswer);
-				countDownTimer.hideShow();
+				triviaText.showAnswer(triviaText.gamePhaseAnswer, triviaText.gamePhaseQuestion, gameStageIndex, myAnswer);
 			}, 5000);
 		}, 0);
-		console.log(triviaText.correctAnswers);
+	}
+
+	const questions = function() {
+		countDownTimer.setTimer(25, $objDomTimer);
+		countDownTimer.startTimer();
+		triviaText.populateQuestion(gameStageIndex);
+
+		timeOutId = setTimeout(function() {
+			stageChangeHandler(false);
+
+			if (gameStageIndex > 3) {
+				endGame();
+				clearTimeout(timeOutId);
+			}
+
+			setTimeout(questions, 5000);
+			clearTimeout(timeOutId);
+			return;
+		}, 25000);
+	}
+
+	function endGame() {
+		$('#answer-phase').fadeOut(800, function() {
+			$('#end-game').fadeIn(800);
+		});
+		console.log('dfdjfaidfjiadjfasdf;ijas;df');
+	}
 
 
+
+	// questions();
+
+	$('#game').children().eq(1).children('.list-group').children('button').click(function(event) {
+		const myAnswer = triviaText.isCorrectAnswer($(this).data('ref'));
+		stageChangeHandler(myAnswer);
+		console.log(gameStageIndex);
+
+		if (gameStageIndex > 3) {
+			endGame();
+			clearTimeout(timeOutId);
+		}
+
+		setTimeout(questions, 5000);
+		clearTimeout(timeOutId);
+		return;
 	});
+
+
+
+
 
 
 }(jQuery));
