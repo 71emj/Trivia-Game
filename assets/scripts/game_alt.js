@@ -170,108 +170,108 @@
 		}
 
 		// trivia game handler
-		// const triviaGameHandler = {
+		const triviaGameHandler = {
 
-		// 	// game state flags
-		// 	gameStageIndex: 0,
+			// game state flags
+			gameStageIndex: 0,
 
-		// 	timeOutId: null,
+			timeOutId: null,
 
-		// 	// DOM object reference
-		// 	$objDomDefault: $('#game').children().eq(0),
+			// DOM object reference
+			$objDomDefault: $('#game').children().eq(0),
 
-		// 	$objDomTriviaTheme: $('.jumbotron').children().eq(0),
+			$objDomTriviaTheme: $('.jumbotron').children().eq(0),
 
-		// 	$objDomTimer: $('#game').children().eq(0).children('.timer').eq(0),
+			$objDomTimer: $('#game').children().eq(0).children('.timer').eq(0),
 
-		// 	$objDomQuestion: $('#game').children().eq(0).children().eq(0).children('p'),
+			$objDomQuestion: $('#game').children().eq(0).children().eq(0).children('p'),
 
-		// 	$objDomAnsweringBtns: $('#game').children().eq(0).children('.list-group').children(),
+			$objDomAnsweringBtns: $('#game').children().eq(0).children('.list-group').children(),
 
-		// 	$objDomGameInit: $('#intro'),
+			$objDomGameInit: $('#intro'),
 
-		// 	$objDomGameQuestion: $('#question-phase'),
+			$objDomGameQuestion: $('#question-phase'),
 
-		// 	$objDomGameAnswer: $('#answer-phase'),
+			$objDomGameAnswer: $('#answer-phase'),
 
-		// 	$objDomGameOver: $('#end-game'),
+			$objDomGameOver: $('#end-game'),
 
-		// 	// obj & library reference
-		// 	library: triviaLibrary,
+			// obj & library reference
+			library: triviaLibrary,
 
-		// 	timer: countDownTimer,
+			timer: countDownTimer,
 
-		// 	trivia: triviaText,
-
-
-		// 	// methods
-		// 	gameInit: function(triviaText) {
-		// 		triviaText.triviaSetup(
-		// 			this.library,
-		// 			this.$objDomTriviaTheme,
-		// 			this.$objDomQuestion,
-		// 			this.$objDomAnsweringBtns,
-		// 			this.$objDomGameQuestion,
-		// 			this.$objDomGameAnswer
-		// 		);
-		// 		return;
-		// 	},
-
-		// 	stageChangeHandler: function (countDownTimer, triviaText, myAnswer = false) {
-		// 		triviaText.showAnswer(
-		// 			this.$objDomGameQuestion,
-		// 			this.$objDomGameAnswer,
-		// 			this.gameStageIndex,
-		// 			myAnswer
-		// 		);
-		// 		this.gameStageIndex += 1;
-		// 		countDownTimer.stop().bind(countDownTimer);
-		// 		setTimeout(function() {
-		// 			triviaText.showAnswer(
-		// 				this.$objDomGameAnswer,
-		// 				this.$objDomGameQuestion,
-		// 				this.gameStageIndex,
-		// 				myAnswer
-		// 			);
-		// 		}, 5000);
-		// 	},
-
-		// 	triviaGameStage: function(countDownTimer, triviaText) {
-		// 		countDownTimer.setTimer(25, this.$objDomTimer);
-		// 		countDownTimer.startTimer();
-		// 		triviaText.populateQuestion(this.gameStageIndex);
-
-		// 		this.timeOutId = setTimeout(function() {
-		// 			this.stageChangeHandler(false);
-
-		// 			if (this.gameStageIndex < 4) {
-		// 				setTimeout(triviaGameStage.call(this), 5000);
-		// 			}
-		// 			clearTimeout(this.timeOutId);
-		// 			return;
-		// 		}, 25000);
-		// 	}
-
-		// }
+			trivia: triviaText,
 
 
+			// methods
+			gameInit: function(triviaText) {
+				triviaText.triviaSetup(
+					this.library,
+					this.$objDomTriviaTheme,
+					this.$objDomQuestion,
+					this.$objDomAnsweringBtns,
+					this.$objDomGameQuestion,
+					this.$objDomGameAnswer
+				);
+				return;
+			},
 
-		// triviaGameHandler.gameInit(triviaText);
-		// triviaGameHandler.triviaGameStage(countDownTimer, triviaText);
+			stageChangeHandler: function (countDownTimer, triviaText, myAnswer = false) {
+				triviaText.showAnswer(
+					this.$objDomGameQuestion,
+					this.$objDomGameAnswer,
+					this.gameStageIndex,
+					myAnswer
+				);
+				this.gameStageIndex += 1;
+				countDownTimer.stop().bind(countDownTimer);
+				setTimeout(function() {
+					triviaText.showAnswer(
+						this.$objDomGameAnswer,
+						this.$objDomGameQuestion,
+						this.gameStageIndex,
+						myAnswer
+					);
+				}, 5000);
+			},
 
-		// triviaGameHandler.$objDomDefault
-		// 	.children('.list-group')
-		// 	.children('button')
-		// 	.click(function(event) {
-		// 		triviaText.isCorrectAnswer($(this).data('ref'));
-		// 		triviaGameHandler.stageChangeHandler(countDownTimer, triviaText, true);
-		// 		console.log(triviaGameHandler.gameStageIndex);
+			triviaGameStage: function(countDownTimer, triviaText) {
+				countDownTimer.setTimer(25, this.$objDomTimer);
+				countDownTimer.startTimer();
+				triviaText.populateQuestion(this.gameStageIndex);
 
-		// 		if (triviaGameHandler.gameStageIndex < 4) {
-		// 			setTimeout(triviaGameHandler.triviaGameStage.call(triviaGameHandler), 5000);
-		// 		}
-		// 		clearTimeout(triviaGameHandler.timeOutId);
-		// 	});
+				this.timeOutId = setTimeout(function() {
+					this.stageChangeHandler(false);
+
+					if (this.gameStageIndex < 4) {
+						setTimeout(triviaGameStage.call(this), 5000);
+					}
+					clearTimeout(this.timeOutId);
+					return;
+				}, 25000);
+			}
+
+		}
+
+
+
+		triviaGameHandler.gameInit(triviaText);
+		triviaGameHandler.triviaGameStage(countDownTimer, triviaText);
+
+		triviaGameHandler.$objDomDefault
+			.children('.list-group')
+			.children('button')
+			.click(function(event) {
+				triviaText.isCorrectAnswer($(this).data('ref'));
+				triviaGameHandler.stageChangeHandler(countDownTimer, triviaText, true);
+				console.log(triviaGameHandler.gameStageIndex);
+
+				if (triviaGameHandler.gameStageIndex < 4) {
+					setTimeout(triviaGameHandler.triviaGameStage.call(triviaGameHandler), 5000);
+				}
+				clearTimeout(triviaGameHandler.timeOutId);
+			});
 
 
 		const roundDuration = 50;
@@ -292,8 +292,7 @@
 				$('#answer-phase')
 			);
 
-			$('.theme').html(`<em><b>${triviaText.theme}</b></em>`);
-			console.log(triviaText.theme);
+			$('.theme').text(triviaText.triviaTheme);
 			$objDomTimer.text(countDownTimer.setTime);
 			return;
 		};

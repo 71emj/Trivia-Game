@@ -1,44 +1,44 @@
 const triviaLibrary = new Array({
 	"theme": "Star Wars",
 	"quizes": [{
-			"question": "lorem ipsum 1",
+			"question": "In how many languages is C-3P0 fluent?",
 			"image": "assets/images/image_1.jpg",
 			"answers": [{
-					"ask": "Why am I here?",
+					"ask": "5",
 					"isCorrect": false
 				},
 				{
-					"ask": "Seriously why Am I here?",
-					"isCorrect": false
-				},
-				{
-					"ask": "Is the timer still going?",
-					"isCorrect": false
-				},
-				{
-					"ask": "Alright, I give up.",
+					"ask": "Well, probably more than 100.",
 					"isCorrect": true
+				},
+				{
+					"ask": "6 million",
+					"isCorrect": false
+				},
+				{
+					"ask": "English",
+					"isCorrect": false
 				}
 			]
 		},
 		{
-			"question": "lorem ipsum 2",
+			"question": "What day is Wookiee Life Day, and where did we first learn about the holiday?",
 			"image": "assets/images/image_2.jpg",
 			"answers": [{
-					"ask": "Why am I here?",
-					"isCorrect": false
-				},
-				{
-					"ask": "Seriously why Am I here?",
-					"isCorrect": false
-				},
-				{
-					"ask": "Is the timer still going?",
-					"isCorrect": false
-				},
-				{
-					"ask": "Alright, I give up.",
+					"ask": "November 17",
 					"isCorrect": true
+				},
+				{
+					"ask": "Janurary 1st",
+					"isCorrect": false
+				},
+				{
+					"ask": "It's summer time~",
+					"isCorrect": false
+				},
+				{
+					"ask": "What's a Wookie?",
+					"isCorrect": false
 				}
 			]
 		},
