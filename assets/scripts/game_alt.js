@@ -274,6 +274,11 @@
 			});
 
 
+
+		triviaGameHandler.timer.prototype = 
+
+
+
 		const roundDuration = 50;
 
 		let gameStageIndex = 0;
